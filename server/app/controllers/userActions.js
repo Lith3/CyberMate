@@ -1,3 +1,6 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 // Import access to database tables
 const tables = require("../../database/tables");
 
@@ -29,9 +32,30 @@ const add = async (req, res, next) => {
   const user = req.body;
 
   try {
-    // Insert the item into the database
-    await tables.user.create(user);
+    // Set the number of rounds to generate the salt used in the hash
+    const saltRounds = 10;
 
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+
+    // Replace plaintext password with hashed password
+    user.password = hashedPassword;
+    // Insert the item into the database
+    // Insert the item into the database
+    const insertId = await tables.user.create(user);
+
+    delete req.body.password;
+
+    // Generate JWT token
+    const token = jwt.sign({ sub: insertId }, process.env.APP_SECRET, {
+      expiresIn: "1d",
+    });
+
+    // Set the token in a cookie
+    res.cookie("cybermateCookie", token, {
+      httpOnly: true,
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json();
   } catch (err) {
