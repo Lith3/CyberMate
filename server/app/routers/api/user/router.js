@@ -7,10 +7,12 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import item-related actions
-const { add } = require("../../../controllers/userActions");
+const { add, login } = require("../../../controllers/userActions");
 
 // Route to add a new item
 router.post("/", add);
+
+router.post("/login", login);
 
 /* ************************************************************************* */
 

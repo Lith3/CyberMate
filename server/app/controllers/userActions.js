@@ -64,6 +64,38 @@ const add = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const user = await tables.user.login(email);
+    // Check that the user exists and that the password is correct
+    if (
+      user !== null &&
+      user !== undefined &&
+      (await bcrypt.compare(password, user.password)) === true
+    ) {
+      // Remove password from request body
+      delete req.body.password;
+
+      // Generate JWT token
+      const token = jwt.sign({ sub: user.id }, process.env.APP_SECRET, {
+        expiresIn: "1d",
+      });
+
+      // Set the token in a cookie
+      res.cookie("cybermateCookie", token, {
+        httpOnly: true,
+        sameSite: "Strict",
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      res.status(200).json();
+    } else {
+      res.status(401).json({ error: "unauthorized access" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 // The D of BREAD - Destroy (Delete) operation
 // This operation is not yet implemented
 
@@ -72,5 +104,6 @@ module.exports = {
   read,
   // edit,
   add,
+  login,
   // destroy,
 };

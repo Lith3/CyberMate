@@ -1,0 +1,103 @@
+#container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-gap: 5%;
+  grid-template-columns: 1fr 1fr;
+  overflow: auto;
+}
+
+.signupContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.form {
+  width: 90%;
+  padding-left: 25%;
+  font-size: 1em;
+  max-width: 830px;
+}
+
+#imageContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 90%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2.5em;
+}
+#password {
+  padding: 0;
+}
+.smallContainer {
+  min-height: 3.5em;
+  max-width: 500px;
+}
+.incorrect {
+  color: var(--third-color);
+  font-size: 1em;
+}
+#confirmPassowrd {
+  padding-bottom: 1em;
+}
+#account {
+  padding-top: 2em;
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+}
+#accountButton {
+  width: 100%;
+  max-width: 500px;
+}
+#connect {
+  color: var(--third-color);
+  text-decoration: none;
+  padding-left: 1em;
+}
+
+@media screen and (max-width: 1236px) {
+  #imageContainer {
+    display: none;
+  }
+  #container {
+    display: flex;
+  }
+  .signupContainer {
+    align-items: center;
+  }
+  .form {
+    width: 80vw;
+    padding-left: 0px;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .inputContainer {
+    width: 60%;
+    min-width: 200px;
+  }
+  #accountButton {
+    width: auto;
+  }
+}
+@media screen and (max-width: 700px) {
+  .form {
+    font-size: 0.7em;
+  }
+}

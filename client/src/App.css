@@ -43,3 +43,43 @@ select,
 button {
   font-family: "chakra petch";
 }
+.bouton1 {
+  color: var(--main-color);
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 15px;
+  font-size: 1.8em;
+  padding: 0.5em;
+  font-weight: bold;
+}
+
+.bouton2 {
+  background-color: var(--main-color);
+  color: var(--third-color);
+  border: 3px var(--third-color) solid;
+  border-radius: 15px;
+  font-size: 2em;
+  padding: 0.5em;
+  min-width: 200px;
+}
+.inputSizeM {
+  background-color: var(--input-background);
+  color: white;
+  font-size: 2em;
+  border: none;
+  height: 1.8em;
+  width: 100%;
+  text-align: center;
+  border-radius: 15px;
+  max-width: 500px;
+}
+.labelSizeM {
+  color: white;
+  font-size: 2em;
+  padding-bottom: 0.3em;
+}
+#root {
+  background-color: var(--main-color);
+  height: 100vh;
+  width: 100vw;
+}
