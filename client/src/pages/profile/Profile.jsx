@@ -61,12 +61,14 @@ function Profile() {
           credentials: "include",
         });
         if (response.status === 204) {
-          dispatch({ type: "SET_BEFORE_CHANGE", payload: state.customer });
+          dispatch({ type: "SET_BEFORE_CHANGE", payload: state.user });
           dispatch({ type: "TOGGLE_EDIT_MODE" });
           notify("Informations mises à jour avec succès !", "success");
         }
         const data = await response.json();
         notify(data.validationErrors[0].message, "error");
+      } else {
+        dispatch({ type: "TOGGLE_EDIT_MODE" });
       }
     } catch (err) {
       console.error("Fetch error:", err);

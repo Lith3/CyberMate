@@ -22,7 +22,7 @@
 }
 .input {
   padding: 0.6em;
-  margin: 5px 0;
+  margin: 15px;
   border: none;
   border-radius: 15px;
   background-color: var(--input-background);
@@ -38,4 +38,19 @@
   margin: 15px;
   cursor: default;
   text-align: center;
+}
+
+@media screen and (max-width: 880px) {
+  .readOnlyInput,
+  .input {
+    min-width: 200px;
+    font-size: 1.2em;
+  }
+
+  .label {
+    padding-left: 15px;
+  }
+  .field {
+    padding: 0;
+  }
 }

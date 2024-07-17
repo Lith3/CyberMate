@@ -1,5 +1,6 @@
 nav {
   height: 5vh;
+  min-height: 40px;
   display: flex;
   justify-content: flex-end;
   gap: 1em;

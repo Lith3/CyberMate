@@ -24,8 +24,9 @@
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  height: 16em;
-  width: 16em;
+  height: 20em;
+  width: 20em;
+  min-height: 20em;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -51,7 +52,7 @@
 }
 
 #buttonContainer {
-  padding-top: 30%;
+  padding-top: 16vh;
   display: flex;
   flex-direction: column;
   gap: 3em;
@@ -64,12 +65,11 @@
 #inputContainer {
   display: flex;
   flex-direction: column;
-  height: 60%;
   justify-content: space-between;
 }
 #password {
   font-size: 1.3em;
-  margin-left: 15px;
+  margin: 15px;
   padding: 0.8em;
 }
 .label {
@@ -77,12 +77,44 @@
   font-size: 1.6em;
   padding-left: 15px;
   padding-bottom: 0.6em;
+  width: 85%;
 }
 #security {
-  padding-top: 5em;
+  padding-top: 3em;
 }
 .row {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+@media screen and (max-width: 880px) {
+  #profile {
+    flex-direction: column;
+    height: 95%;
+    overflow-y: auto;
+  }
+  #container {
+    overflow: auto;
+    box-sizing: border-box;
+  }
+  #buttonContainer {
+    padding: 2em 0;
+  }
+  .sectionOne {
+    width: auto;
+    overflow: unset;
+    padding-top: 1em;
+  }
+  .sectionTwo {
+    width: auto;
+  }
+  .button {
+    font-size: 1.2em;
+  }
+  #avatarContainer {
+    height: 15em;
+    width: 15em;
+    min-height: 15em;
+  }
 }
