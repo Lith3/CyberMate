@@ -4,8 +4,10 @@ import NavBar from "../../components/navbar/NavBar";
 import styles from "./Profile.module.css";
 import Avatar from "../../assets/images/nain.png";
 import EditableField from "../../components/profile_page/EditableField";
+import notify from "../../utils/notify";
 
 function Profile() {
+  const URL = import.meta.env.VITE_API_URL;
   const userData = useLoaderData();
   // Create initial State for the useReducer hook
   const initialState = {
@@ -38,6 +40,38 @@ function Profile() {
     });
   };
 
+  // Send the users updates
+  const handleEditClick = async () => {
+    try {
+      if (state.isEditMode === true && state.beforeChange !== state.user) {
+        // Determine the endpoint based on user type}
+        // Prepare the values to be sent based on user type
+        const values = {
+          username: state.user.username,
+          email: state.user.email,
+        };
+
+        // Send the PUT request to update the customer information
+        const response = await fetch(`${URL}/user`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+          credentials: "include",
+        });
+        if (response.status === 204) {
+          dispatch({ type: "SET_BEFORE_CHANGE", payload: state.customer });
+          dispatch({ type: "TOGGLE_EDIT_MODE" });
+          notify("Informations mises à jour avec succès !", "success");
+        }
+        const data = await response.json();
+        notify(data.validationErrors[0].message, "error");
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  };
   return (
     <>
       <NavBar />
@@ -54,7 +88,11 @@ function Profile() {
             <div id={styles.buttonContainer}>
               {state.isEditMode === true ? (
                 <>
-                  <button className={`button1 ${styles.button}`} type="button">
+                  <button
+                    className={`button1 ${styles.button}`}
+                    type="button"
+                    onClick={handleEditClick}
+                  >
                     SAUVERGARDER
                   </button>
                   <button
@@ -94,10 +132,10 @@ function Profile() {
               />
               <EditableField
                 label="Avatar"
-                // value={state.customer.lastname}
+                value="Soon"
                 isEditMode={state.isEditMode}
                 valueName="username"
-                // onChange={onChange}
+                onChange={() => {}}
               />
             </div>
             <div id={styles.security}>

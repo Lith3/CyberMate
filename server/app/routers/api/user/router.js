@@ -7,11 +7,13 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import user-related actions
-const { add, read, login } = require("../../../controllers/userActions");
+const { add, read, login, edit } = require("../../../controllers/userActions");
 const userIdCookie = require("../../../services/userIdcookie");
 
 // Route to add a new user
 router.post("/", add);
+
+router.put("/", userIdCookie, edit);
 
 router.get("/profile", userIdCookie, read);
 
