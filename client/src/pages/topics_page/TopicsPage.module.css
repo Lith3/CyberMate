@@ -107,6 +107,11 @@
   display: flex;
   justify-content: space-between;
 }
+.loading {
+  color: white;
+  font-size: 5em;
+  text-align: center;
+}
 @media screen and (max-width: 750px) {
   .widowTopicButton,
   #newTopicButton {

@@ -1,12 +1,25 @@
 // Import access to database tables
 const tables = require("../../database/tables");
 
+// The B of BREAD - Browse (Read All) operation
+const browse = async (req, res, next) => {
+  try {
+    // Fetch all user from the database
+    const user = await tables.topic.readAll();
+
+    // Respond with the user in JSON format
+    res.status(200).json(user);
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the topic data from the request body
   let { subject } = req.body;
   const userId = req.user;
-  subject = `${subject.slice(0, 245)}...`;
+  if (subject.length > 245) subject = `${subject.slice(0, 245)}...`;
   let date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0"); // Les mois commencent à 0, donc il faut ajouter 1
@@ -21,6 +34,8 @@ const add = async (req, res, next) => {
       date,
       userId
     );
+
+    await tables.message.create(userId, date, req.body.subject, insertId);
     // Respond with HTTP 201 (Created) and the ID of the newly inserted topic
     res.status(201).json({ insertId });
   } catch (err) {
@@ -33,6 +48,4 @@ const add = async (req, res, next) => {
 // This operation is not yet implemented
 
 // Ready to export the controller functions
-module.exports = {
-  add,
-};
+module.exports = { browse, add };

@@ -7,9 +7,11 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import item-related actions
-const { add } = require("../../../controllers/topicActions");
+const { browse, add } = require("../../../controllers/topicActions");
 const userIdCookie = require("../../../services/userIdcookie");
+
 // Route to add a new item
+router.get("/", browse);
 router.post("/", userIdCookie, add);
 
 /* ************************************************************************* */

@@ -4,20 +4,20 @@ class UserRepository extends AbstractRepository {
   constructor() {
     // Call the constructor of the parent class (AbstractRepository)
     // and pass the table name "item" as configuration
-    super({ table: "topic" });
+    super({ table: "message" });
   }
 
   // The C of CRUD - Create operation
 
-  async create(title, subject, date, userId) {
+  async create(userId, date, content, topicId) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (title, user_id, date, subject) values (?,?,?,?)`,
-      [title, userId, date, subject]
+      `insert into ${this.table} (user_id, date, content, topic_id) values (?,?,?,?)`,
+      [userId, date, content, topicId]
     );
 
     // Return the ID of the newly inserted item
-    return result.insertId;
+    return result.affectedRows;
   }
 
   // The Rs of CRUD - Read operations

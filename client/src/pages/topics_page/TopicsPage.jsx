@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./TopicsPage.module.css";
 import NavBar from "../../components/navbar/NavBar";
 import magnifier from "../../assets/images/search_neon.png";
@@ -8,16 +8,36 @@ import notify from "../../utils/notify";
 function TopicsPage() {
   const URL = import.meta.env.VITE_API_URL;
   const [newTopicWidow, setNewTopicWindow] = useState(false);
-  const topics = [
-    {
-      id: 4,
-      title: "Lorem ipsum",
-      author: "Litha",
-      date: "14/07/2024",
-      subject:
-        "Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eenim eius !    ",
-    },
-  ];
+  const [change, setChange] = useState(false);
+  const [topics, setTopics] = useState([]);
+
+  //   const topics = [
+  //     {
+  //       id: 4,
+  //       title: "Lorem ipsum",
+  //       author: "Litha",
+  //       date: "14/07/2024",
+  //       subject:
+  //         "Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eenim eius !    ",
+  //     },
+
+  //   ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${URL}/topic`);
+        if (response.status !== 200) {
+          throw new Error("Erreur lors de la récupération des données.");
+        }
+        const jsonData = await response.json();
+        setTopics(jsonData);
+      } catch (error) {
+        notify("Erreur de réseau de connexion", "error");
+        console.error("Fetch error:", error);
+      }
+    };
+    fetchData();
+  }, [URL, change]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +55,8 @@ function TopicsPage() {
       });
 
       if (response.status === 201) {
-        notify("Votre compte à bien été crée", "success");
+        notify("Nouveau topic créé !", "success");
+        setChange(!change);
       }
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -101,13 +122,17 @@ function TopicsPage() {
               </div>
             </div>
           )}
-          <ul id={styles.topicList}>
-            {topics.map((topic) => (
-              <li className={styles.topicContainer} key={topic.id}>
-                <Topic topic={topic} />
-              </li>
-            ))}
-          </ul>
+          {topics.length > 0 ? (
+            <ul id={styles.topicList}>
+              {topics.map((topic) => (
+                <li className={styles.topicContainer} key={topic.id}>
+                  <Topic topic={topic} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.loading}>...</p>
+          )}
         </main>
       </div>
     </>

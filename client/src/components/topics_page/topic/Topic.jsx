@@ -8,7 +8,7 @@ function Topic({ topic }) {
         <h2>{topic.title}</h2>
         <p className={styles.TopicdateTopic}>{topic.date}</p>
       </span>
-      <p className={styles.author}>Auteur : {topic.author}</p>
+      <p className={styles.author}>Auteur : {topic.username}</p>
       <p className={styles.topicSubject}>{topic.subject}</p>
     </div>
   );
@@ -17,7 +17,7 @@ function Topic({ topic }) {
 Topic.propTypes = {
   topic: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     subject: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   }).isRequired,
