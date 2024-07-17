@@ -3,15 +3,15 @@ const express = require("express");
 const router = express.Router();
 
 /* ************************************************************************* */
-// Import And Use Routers Here
+// Define Your API Routes Here
 /* ************************************************************************* */
 
-const userRouter = require("./user/router");
-const topicRouter = require("./topic/router");
+// Import item-related actions
+const { add } = require("../../../controllers/topicActions");
+const userIdCookie = require("../../../services/userIdcookie");
+// Route to add a new item
+router.post("/", userIdCookie, add);
 
-router.use("/user", userRouter);
-
-router.use("/topic", topicRouter);
 /* ************************************************************************* */
 
 module.exports = router;

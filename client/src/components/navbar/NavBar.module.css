@@ -1,0 +1,14 @@
+nav {
+  height: 5vh;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+  font-size: 1.5em;
+  align-items: center;
+  padding-right: 1em;
+}
+
+.navItem {
+  text-decoration: none;
+  color: var(--third-color);
+}

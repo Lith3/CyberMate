@@ -117,7 +117,7 @@ function SignUp() {
           </div>
           <button
             id={styles.accountButton}
-            className="bouton1"
+            className="button1"
             type="submit"
             disabled={passwordForm !== passwordConf}
           >
@@ -125,7 +125,7 @@ function SignUp() {
           </button>
           <span id={styles.account}>
             DÉJÀ UN COMPTE ?{" "}
-            <Link id={styles.connect} to="/connection">
+            <Link id={styles.connect} to="/connexion">
               CONNECTEZ-VOUS
             </Link>
           </span>

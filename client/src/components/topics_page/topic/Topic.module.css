@@ -1,0 +1,23 @@
+.topic {
+  width: 90%;
+  padding: 1.1em 0;
+  color: white;
+}
+
+.topicHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dateTopic {
+  font-size: 1.2em;
+}
+.author {
+  color: var(--third-color);
+  font-size: 1.2em;
+  padding: 0.5em 0;
+}
+.topicSubject {
+  font-size: 1.1em;
+}

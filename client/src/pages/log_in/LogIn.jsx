@@ -25,7 +25,7 @@ function LogIn() {
 
       if (response.status === 200) {
         notify("Vous êtes connecté", "success");
-        navigate("/topic");
+        navigate("/topics");
       } else {
         notify("Email ou mot de passe incorrect", "error");
       }
@@ -67,7 +67,11 @@ function LogIn() {
             />
           </div>
 
-          <button id={styles.accountButton} className="bouton1" type="submit">
+          <button
+            id={styles.accountButton}
+            className="button1 connextButton"
+            type="submit"
+          >
             CONNECTEZ-VOUS
           </button>
           <span id={styles.account}>

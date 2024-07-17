@@ -8,7 +8,7 @@ create table user (
 
 create table topic (
   id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
+  title varchar(60) not null,
   user_id int unsigned not null,
   date DATE NOT NULL,
   subject VARCHAR(255) not null,

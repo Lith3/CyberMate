@@ -1,0 +1,129 @@
+#header {
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#searchContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+#newTopicButton {
+  font-size: 1.5em;
+}
+#magnifier {
+  height: 2em;
+  padding: 0 0.5em;
+}
+#inputContainer {
+  display: flex;
+  align-items: center;
+  border: var(--third-color) solid 1px;
+  border-radius: 15px;
+  margin-right: 0.5em;
+}
+#topicList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  padding-top: 1em;
+  max-height: 85vh;
+  overflow: auto;
+}
+.topicContainer {
+  width: 80%;
+  border-radius: 15px;
+  background-color: var(--topic-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#searchInput {
+  background-color: var(--main-color);
+  height: 100%;
+  font-size: 1.5em;
+  border: none;
+  color: var(--third-color);
+  margin-right: 0.5em;
+}
+/* ----------------- POPUP NEW TOPIC STYLE -----------------*/
+#newTopicContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(17, 19, 20, 0.6);
+}
+#newTopic {
+  display: flex;
+  border: solid 2px var(--third-color);
+  height: 50vh;
+  width: 70vw;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--topic-background);
+  border-radius: 15px;
+}
+#textContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 90%;
+  justify-content: space-evenly;
+}
+#title,
+#subject {
+  background-color: #1d2945;
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+
+#title {
+  font-size: 1.8em;
+  height: 15%;
+  padding-left: 0.5em;
+}
+#subject {
+  height: 60%;
+  padding: 0.5rem;
+  font-size: 1.5em;
+}
+
+.widowTopicButton {
+  font-size: 1.4em;
+}
+#createTopic {
+  min-width: 200px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 750px) {
+  .widowTopicButton,
+  #newTopicButton {
+    font-size: 1em;
+    min-width: 150px;
+  }
+  #createTopic {
+    min-width: 130px;
+  }
+
+  .newTopicButton {
+    font-size: 1.4em;
+  }
+  #searchInput {
+    width: 30vw;
+  }
+  #newTopic {
+    width: 90vw;
+  }
+}
