@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { AuthentificationProvider } from "./assets/use_context/Authentification";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -19,7 +20,9 @@ function App() {
         theme="dark"
         transition:Bounce
       />
-      <Outlet />{" "}
+      <AuthentificationProvider>
+        <Outlet />
+      </AuthentificationProvider>
     </>
   );
 }

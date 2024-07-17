@@ -1,27 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./TopicsPage.module.css";
 import NavBar from "../../components/navbar/NavBar";
 import magnifier from "../../assets/images/search_neon.png";
 import Topic from "../../components/topics_page/topic/Topic";
 import notify from "../../utils/notify";
+import { AuthentificationContext } from "../../assets/use_context/Authentification";
 
 function TopicsPage() {
   const URL = import.meta.env.VITE_API_URL;
+  const { auth } = useContext(AuthentificationContext);
   const [newTopicWidow, setNewTopicWindow] = useState(false);
   const [change, setChange] = useState(false);
   const [topics, setTopics] = useState([]);
 
-  //   const topics = [
-  //     {
-  //       id: 4,
-  //       title: "Lorem ipsum",
-  //       author: "Litha",
-  //       date: "14/07/2024",
-  //       subject:
-  //         "Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eenim eius !    ",
-  //     },
-
-  //   ];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,7 +47,12 @@ function TopicsPage() {
 
       if (response.status === 201) {
         notify("Nouveau topic créé !", "success");
+        setNewTopicWindow(!newTopicWidow);
         setChange(!change);
+      }
+      if (response.status === 401) {
+        setNewTopicWindow(!newTopicWidow);
+        notify("Vous devez être connecté pour pouvoir faire ça !", "error");
       }
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -76,9 +72,10 @@ function TopicsPage() {
             </span>
             <button
               id={styles.newTopicButton}
-              className="button1"
+              className={`button1 ${auth !== true && styles.disable}`}
               type="button"
               onClick={() => setNewTopicWindow(!newTopicWidow)}
+              disabled={auth !== true}
             >
               NOUVEAU TOPIC
             </button>

@@ -112,6 +112,10 @@
   font-size: 5em;
   text-align: center;
 }
+
+.disable {
+  opacity: 30%;
+}
 @media screen and (max-width: 750px) {
   .widowTopicButton,
   #newTopicButton {
