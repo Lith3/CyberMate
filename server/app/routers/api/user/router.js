@@ -6,11 +6,14 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Import item-related actions
-const { add, login } = require("../../../controllers/userActions");
+// Import user-related actions
+const { add, read, login } = require("../../../controllers/userActions");
+const userIdCookie = require("../../../services/userIdcookie");
 
-// Route to add a new item
+// Route to add a new user
 router.post("/", add);
+
+router.get("/profile", userIdCookie, read);
 
 router.post("/login", login);
 

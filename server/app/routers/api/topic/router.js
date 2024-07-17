@@ -6,11 +6,11 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Import item-related actions
+// Import topic-related actions
 const { browse, add } = require("../../../controllers/topicActions");
 const userIdCookie = require("../../../services/userIdcookie");
 
-// Route to add a new item
+// Route to add a new topic
 router.get("/", browse);
 router.post("/", userIdCookie, add);
 

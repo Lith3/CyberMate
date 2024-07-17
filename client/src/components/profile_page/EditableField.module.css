@@ -1,0 +1,41 @@
+.fieldContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+}
+
+.input,
+.label,
+.readOnlyInput {
+  color: white;
+  font-size: 1.6em;
+  width: 85%;
+}
+
+.label {
+  padding-bottom: 0.6em;
+}
+.input {
+  padding: 0.6em;
+  margin: 5px 0;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--input-background);
+  text-align: center;
+}
+
+.readOnlyInput {
+  appearance: none;
+  border: 1px solid var(--secondary-color);
+  border-radius: 15px;
+  background-color: transparent;
+  padding: 0.6em;
+  margin: 15px;
+  cursor: default;
+  text-align: center;
+}

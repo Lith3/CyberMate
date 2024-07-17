@@ -27,7 +27,7 @@ const add = async (req, res, next) => {
 
   date = `${year}-${month}-${day}`;
   try {
-    // Insert the item into the database
+    // Insert the topic into the database
     const insertId = await tables.topic.create(
       req.body.title,
       subject,

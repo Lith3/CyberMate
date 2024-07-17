@@ -7,15 +7,15 @@ const tables = require("../../database/tables");
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific item from the database based on the provided ID
-    const item = await tables.user.read(req.params.id);
+    // Fetch a specific user from the database based on the provided ID
+    const user = await tables.user.read(req.user);
 
-    // If the item is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the item in JSON format
-    if (item == null) {
+    // If the  is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the user in JSON format
+    if (user === null || user === undefined) {
       res.sendStatus(404);
     } else {
-      res.json(item);
+      res.json(user);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
@@ -28,7 +28,7 @@ const read = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
-  // Extract the item data from the request body
+  // Extract the user data from the request body
   const user = req.body;
 
   try {
@@ -39,8 +39,8 @@ const add = async (req, res, next) => {
 
     // Replace plaintext password with hashed password
     user.password = hashedPassword;
-    // Insert the item into the database
-    // Insert the item into the database
+    // Insert the user into the database
+    // Insert the user into the database
     const insertId = await tables.user.create(user);
 
     delete req.body.password;
@@ -56,7 +56,7 @@ const add = async (req, res, next) => {
       sameSite: "Strict",
       maxAge: 24 * 60 * 60 * 1000,
     });
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted item
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted user
     res.status(201).json();
   } catch (err) {
     // Pass any errors to the error-handling middleware
