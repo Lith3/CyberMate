@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 55px;
 }
 #searchContainer {
   display: flex;
@@ -120,10 +121,7 @@
   .widowTopicButton,
   #newTopicButton {
     font-size: 1em;
-    min-width: 150px;
-  }
-  #createTopic {
-    min-width: 130px;
+    min-width: 200px;
   }
 
   .newTopicButton {
@@ -132,7 +130,28 @@
   #searchInput {
     width: 30vw;
   }
+  #inputContainer {
+    width: 75%;
+    min-width: 200px;
+  }
   #newTopic {
     width: 90vw;
+  }
+  #searchContainer {
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+  }
+  #header {
+    height: 13vh;
+    min-height: 100px;
+  }
+  .buttonContainer {
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.5em;
+  }
+  #textContainer {
+    gap: 0.5em;
   }
 }
