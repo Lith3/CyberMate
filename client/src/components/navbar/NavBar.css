@@ -12,3 +12,7 @@ nav {
   text-decoration: none;
   color: var(--third-color);
 }
+
+.navItem.active {
+  display: none;
+}
