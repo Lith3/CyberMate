@@ -31,9 +31,8 @@ app.use(
   cors({
     origin: [
       process.env.CLIENT_URL, // keep this one, after checking the value in `server/.env`
-      "http://mysite.com",
-      "http://another-domain.com",
     ],
+    credentials: true,
   })
 );
 

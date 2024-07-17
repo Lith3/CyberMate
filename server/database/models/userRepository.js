@@ -12,8 +12,8 @@ class UserRepository extends AbstractRepository {
   async create(user) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (email, password) values (?, ?)`,
-      [user.email, user.password]
+      `insert into ${this.table} (username, email, password) values (?,?, ?)`,
+      [user.username, user.email, user.password]
     );
 
     // Return the ID of the newly inserted item

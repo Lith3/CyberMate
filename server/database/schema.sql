@@ -1,5 +1,6 @@
 create table user (
   id int unsigned primary key auto_increment not null,
+  username varchar(20) NOT NULL UNIQUE,
   email varchar(255) not null unique,
   password varchar(255) not null,
   role varchar(20) default "user"
