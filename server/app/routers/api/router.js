@@ -1,5 +1,7 @@
 const express = require("express");
 
+const path = require("path");
+
 const router = express.Router();
 
 /* ************************************************************************* */
@@ -15,6 +17,11 @@ router.use("/user", userRouter);
 router.use("/topic", topicRouter);
 
 router.use("/auth", authRouter);
+
+router.use(
+  "/avatars",
+  express.static(path.join(__dirname, "../../../public/assets/avatars"))
+);
 
 /* ************************************************************************* */
 

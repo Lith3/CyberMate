@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 // Import access to database tables
 const tables = require("../../database/tables");
 
+const URL = `http://${process.env.DB_HOST}:${process.env.APP_PORT}/api`;
+
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
@@ -126,12 +128,28 @@ const destroy = async (req, res, next) => {
     next(err);
   }
 };
+
+const editImage = async (req, res, next) => {
+  try {
+    const filePath = `${URL}/avatars/${req.file.filename}`;
+    if (req.file !== null || req.file !== undefined) {
+      await tables.user.editImagePath(req.user, filePath);
+      res.status(204).json(filePath);
+    } else {
+      res.status(400).json({
+        validationErrors: [{ message: "Aucun fichier téléchargé." }],
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 // Ready to export the controller functions
 module.exports = {
   read,
-  // edit,
   add,
   login,
   edit,
+  editImage,
   destroy,
 };

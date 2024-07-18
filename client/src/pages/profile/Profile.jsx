@@ -1,8 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { useReducer, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import NavBar from "../../components/navbar/NavBar";
 import styles from "./Profile.module.css";
-import Avatar from "../../assets/images/nain.png";
 import EditableField from "../../components/profile_page/EditableField";
 import notify from "../../utils/notify";
 
@@ -11,6 +10,7 @@ function Profile() {
   const navigate = useNavigate();
   const userData = useLoaderData();
   const [confirmBox, setConfirmBox] = useState(false);
+  const [changeAvatar, setChangeAvatar] = useState(false);
 
   // Create initial State for the useReducer hook
   const initialState = {
@@ -97,6 +97,46 @@ function Profile() {
       console.error("Fetch error:", err);
     }
   };
+
+  // Image upload
+
+  const avatarImg = useRef(null);
+
+  const handleClick = () => {
+    if (avatarImg.current) {
+      avatarImg.current.click();
+    }
+  };
+
+  const imageHandler = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    try {
+      const response = await fetch(`${URL}/user/image`, {
+        method: "PUT",
+        credentials: "include",
+        body: formData,
+      });
+      if (response.status !== 204) {
+        notify(
+          "Erreur lors de l'upload de limage, verifier que votre image fait moins de 1 mo et qu'elle est du type jpeg/jpg/png/gif",
+          "error"
+        );
+
+        throw new Error("Erreur lors du téléchargement de l'image");
+      }
+
+      if (response.status === 204) {
+        notify("Image téléchargée avec succès", "success");
+        setTimeout(() => {
+          window.location.reload();
+        }, "2000");
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+    }
+  };
   return (
     <>
       <NavBar />
@@ -127,12 +167,46 @@ function Profile() {
             </div>{" "}
           </div>
         )}
+        {changeAvatar === true && (
+          <div className={styles.confirmBoxContainer}>
+            <div id={styles.confirmBox}>
+              <form
+                className={styles.fileContainer}
+                onSubmit={imageHandler}
+                encType="multipart/form-data"
+                method="post"
+              >
+                {" "}
+                <button
+                  id={styles.uploadButton}
+                  type="button"
+                  onClick={handleClick}
+                >
+                  Choisir une image
+                </button>
+                <input
+                  name="avatar"
+                  id={styles.inputFile}
+                  type="file"
+                  ref={avatarImg}
+                />
+                <button
+                  id={styles.validateFile}
+                  className="button1"
+                  type="submit"
+                >
+                  VALDER
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
         <div id={styles.profile}>
           <section className={styles.sectionOne}>
             <div id={styles.avatarContainer}>
               <img
                 id={styles.avatar}
-                src={Avatar}
+                src={userData.avatar}
                 alt="Avatar de l'utilisateur"
               />
             </div>
@@ -190,13 +264,18 @@ function Profile() {
                 valueName="username"
                 onChange={onChange}
               />
-              <EditableField
-                label="Avatar"
-                value="Soon"
-                isEditMode={state.isEditMode}
-                valueName="username"
-                onChange={() => {}}
-              />
+              <div className={styles.field}>
+                <p id={styles.avatarLabel} className={styles.label}>
+                  Avatar
+                </p>
+                <button
+                  className={`${styles.avatarButton} ${styles.button}`}
+                  type="button"
+                  onClick={() => setChangeAvatar(!changeAvatar)}
+                >
+                  CHANGER D'IMAGE
+                </button>
+              </div>
             </div>
             <div id={styles.security}>
               <p className={styles.label}>Securité</p>

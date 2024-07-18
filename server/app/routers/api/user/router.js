@@ -13,8 +13,10 @@ const {
   login,
   edit,
   destroy,
+  editImage,
 } = require("../../../controllers/userActions");
 const userIdCookie = require("../../../services/userIdcookie");
+const upload = require("../../../services/upload");
 
 // Route to add a new user
 router.post("/", add);
@@ -26,6 +28,8 @@ router.get("/profile", userIdCookie, read);
 router.post("/login", login);
 
 router.delete("/", userIdCookie, destroy);
+
+router.put("/image", userIdCookie, upload.single("avatar"), editImage);
 
 /* ************************************************************************* */
 

@@ -3,6 +3,7 @@ create table user (
   username varchar(20) NOT NULL UNIQUE,
   email varchar(255) not null unique,
   password varchar(255) not null,
+  avatar VARCHAR(254) DEFAULT 'http://localhost:3310/api/avatars/default.png',
   role varchar(20) default "user"
 );
 
