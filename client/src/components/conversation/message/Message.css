@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+  min-width: 225px;
 }
 
 .messageHeader {
@@ -21,7 +22,7 @@
   font-size: 1.3em;
 }
 .ulMessage {
-  max-height: 82vh;
+  max-height: 78vh;
 }
 .messageAvatar {
   height: 5em;
@@ -30,4 +31,23 @@
 
 .gap {
   gap: 1em;
+}
+
+#topicName {
+  color: white;
+  text-align: center;
+  padding: 0.7em 0;
+}
+
+.topicTitle {
+  color: var(--third-color);
+}
+
+@media screen and (max-width: 500px) {
+  .messageDate {
+    font-size: 1em;
+  }
+  .messageUsername {
+    font-size: 1.4em;
+  }
 }

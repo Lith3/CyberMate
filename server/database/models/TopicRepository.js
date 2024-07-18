@@ -33,10 +33,11 @@ class UserRepository extends AbstractRepository {
     return rows[0];
   }
 
-  async readAll() {
+  async readAll(search) {
     // Execute the SQL SELECT query to retrieve all user from the "user" table
     const [rows] = await this.database.query(
-      `select ${this.table}.id, title, username, DATE_FORMAT(date, "%d/%m/%Y") AS date, subject from ${this.table} JOIN user ON user_id = user.id`
+      `select ${this.table}.id, title, username, DATE_FORMAT(date, "%d/%m/%Y") AS date, subject from ${this.table} JOIN user ON user_id = user.id where title LIKE ? OR username LIKE ? ORDER by topic.id DESC`,
+      [`%${search}%`, `%${search}%`]
     );
 
     // Return the array of user

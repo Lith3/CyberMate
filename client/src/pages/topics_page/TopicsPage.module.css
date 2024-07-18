@@ -31,8 +31,10 @@
   align-items: center;
   gap: 1.5em;
   padding-top: 1em;
-  max-height: 85vh;
   overflow: auto;
+}
+.topics {
+  max-height: 84vh;
 }
 .topicContainer {
   width: 80%;
@@ -48,12 +50,21 @@
   font-size: 1.5em;
   border: none;
   color: var(--third-color);
+  margin-right: 0.1em;
+}
+#searchReset {
+  font-size: 1.2em;
   margin-right: 0.5em;
+  color: var(--third-color);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 .loading {
   color: white;
   font-size: 5em;
   text-align: center;
+  padding-top: 1em;
 }
 
 .disable {
@@ -137,11 +148,12 @@
     font-size: 1.4em;
   }
   #searchInput {
-    width: 30vw;
+    width: 41vw;
   }
   #inputContainer {
     width: 75%;
     min-width: 200px;
+    justify-content: space-between;
   }
   #newTopic {
     width: 90vw;

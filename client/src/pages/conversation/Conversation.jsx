@@ -35,20 +35,25 @@ function Conversation() {
     };
     fetchData();
   }, [URL, navigate, topicId, change]);
-
   return (
     <>
       <NavBar />
       <main>
         {messages.length > 0 ? (
-          <ul className="ulMessage" id={styles.topicList}>
-            {messages.map((message) => (
-              <li className={styles.topicContainer} key={message.id}>
-                {" "}
-                <Message message={message} />
-              </li>
-            ))}
-          </ul>
+          <>
+            <h2 id="topicName">
+              Bienvenue dans
+              <span className="topicTitle"># {messages[0].title}</span>
+            </h2>
+            <ul className="ulMessage" id={styles.topicList}>
+              {messages.map((message) => (
+                <li className={styles.topicContainer} key={message.id}>
+                  {" "}
+                  <Message message={message} />
+                </li>
+              ))}
+            </ul>
+          </>
         ) : (
           <p className={styles.loading}>...</p>
         )}

@@ -13,23 +13,30 @@ function TopicsPage() {
   const [newTopicWidow, setNewTopicWindow] = useState(false);
   const [change, setChange] = useState(false);
   const [topics, setTopics] = useState([]);
+  const [search, setSearch] = useState("");
+  const [load, setLoad] = useState("...");
 
   useEffect(() => {
     const fetchData = async () => {
+      if (search.length < 3 && search.length > 0) {
+        // Do not search if search string is less than 3 characters but not empty
+        return;
+      }
       try {
-        const response = await fetch(`${URL}/topic`);
+        const response = await fetch(`${URL}/topic?search=${search}`);
         if (response.status !== 200) {
           throw new Error("Erreur lors de la récupération des données.");
         }
         const jsonData = await response.json();
         setTopics(jsonData);
+        setLoad("Aucun résultat");
       } catch (error) {
         notify("Erreur de réseau de connexion", "error");
         console.error("Fetch error:", error);
       }
     };
     fetchData();
-  }, [URL, change]);
+  }, [URL, change, search]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -69,7 +76,20 @@ function TopicsPage() {
           <div id={styles.searchContainer}>
             <span id={styles.inputContainer}>
               <img id={styles.magnifier} src={magnifier} alt="une loupe bleu" />
-              <input id={styles.searchInput} type="text" />
+              <input
+                id={styles.searchInput}
+                type="text"
+                value={search}
+                placeholder="Titre, Auteur"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button
+                id={styles.searchReset}
+                onClick={() => setSearch("")}
+                type="button"
+              >
+                X
+              </button>
             </span>
             <button
               id={styles.newTopicButton}
@@ -96,14 +116,16 @@ function TopicsPage() {
                     id={styles.title}
                     placeholder="Titre"
                     name="title"
-                    min={4}
-                    max={60}
+                    minLength={4}
+                    maxLength={60}
+                    required
                   />
                   <textarea
                     id={styles.subject}
                     name="subject"
-                    min={4}
+                    minLength={4}
                     placeholder="Sujet"
+                    required
                   />
                   <span className={styles.buttonContainer}>
                     <button
@@ -127,7 +149,7 @@ function TopicsPage() {
             </div>
           )}
           {topics.length > 0 ? (
-            <ul id={styles.topicList}>
+            <ul id={styles.topicList} className={styles.topics}>
               {topics.map((topic) => (
                 <li className={styles.topicContainer} key={topic.id}>
                   <Link
@@ -142,7 +164,7 @@ function TopicsPage() {
               ))}
             </ul>
           ) : (
-            <p className={styles.loading}>...</p>
+            <p className={styles.loading}>{load}</p>
           )}
         </main>
       </div>
