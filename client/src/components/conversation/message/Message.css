@@ -16,6 +16,10 @@
   font-size: 1.7em;
   color: var(--third-color);
 }
+
+.messageDate {
+  font-size: 1.3em;
+}
 .ulMessage {
   max-height: 82vh;
 }

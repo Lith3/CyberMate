@@ -13,7 +13,7 @@ function Message({ message }) {
         />
         <span className="messageHeader">
           <p className="messageUsername">{message.username}</p>
-          <p className={styles.TopicdateTopic}>{message.date}</p>
+          <p className="messageDate">{message.date}</p>
         </span>
       </div>
       <p className={styles.topicSubject}>{message.content}</p>
