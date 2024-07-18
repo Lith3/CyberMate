@@ -1,5 +1,5 @@
-import { useLoaderData } from "react-router-dom";
-import { useReducer } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { useReducer, useState } from "react";
 import NavBar from "../../components/navbar/NavBar";
 import styles from "./Profile.module.css";
 import Avatar from "../../assets/images/nain.png";
@@ -8,7 +8,10 @@ import notify from "../../utils/notify";
 
 function Profile() {
   const URL = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const userData = useLoaderData();
+  const [confirmBox, setConfirmBox] = useState(false);
+
   // Create initial State for the useReducer hook
   const initialState = {
     user: { ...userData },
@@ -74,10 +77,56 @@ function Profile() {
       console.error("Fetch error:", err);
     }
   };
+
+  // Delete account button
+
+  const deleteAccount = async () => {
+    try {
+      const response = await fetch(`${URL}/user`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      if (response.status === 204) {
+        notify("Votre compte a été supprimé", "success");
+        navigate("/connexion");
+      } else notify("Une erreur est survenue", "error");
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  };
   return (
     <>
       <NavBar />
       <main id={styles.container}>
+        {confirmBox === true && (
+          <div className={styles.confirmBoxContainer}>
+            <div id={styles.confirmBox}>
+              <p className={styles.textConfirmBox}>
+                Êtes-vous sûr de vouloir supprimer votre compte ?
+              </p>
+              <div className={styles.deleteConf}>
+                {" "}
+                <button
+                  className={`button2 ${styles.buttonConfBox}`}
+                  type="button"
+                  onClick={() => setConfirmBox(!confirmBox)}
+                >
+                  ANNULER
+                </button>
+                <button
+                  className={`${styles.delete} ${styles.buttonConfBox}`}
+                  type="button"
+                  onClick={deleteAccount}
+                >
+                  SUPPRIMER
+                </button>
+              </div>
+            </div>{" "}
+          </div>
+        )}
         <div id={styles.profile}>
           <section className={styles.sectionOne}>
             <div id={styles.avatarContainer}>
@@ -106,13 +155,22 @@ function Profile() {
                   </button>
                 </>
               ) : (
-                <button
-                  className={`button2 ${styles.button}`}
-                  type="button"
-                  onClick={() => dispatch({ type: "TOGGLE_EDIT_MODE" })}
-                >
-                  EDITER
-                </button>
+                <>
+                  <button
+                    className={`button2 ${styles.button}`}
+                    type="button"
+                    onClick={() => dispatch({ type: "TOGGLE_EDIT_MODE" })}
+                  >
+                    EDITER
+                  </button>
+                  <button
+                    className={`${styles.delete} ${styles.button}`}
+                    type="button"
+                    onClick={() => setConfirmBox(!confirmBox)}
+                  >
+                    SUPPRIMER
+                  </button>
+                </>
               )}
             </div>
           </section>

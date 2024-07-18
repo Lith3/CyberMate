@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import notify from "../../utils/notify";
 import girlGun from "../../assets/images/girlGun.png";
 import styles from "./SignUp.module.css";
@@ -10,6 +10,7 @@ function SignUp() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&:;ù#àâäéèêëîïôöùûüÿç])[A-Za-z\d@$!%*?&:;ù#àâäéèêëîïôöùûüÿç]{12,}$/;
   const [passwordForm, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (event, setState) => {
     setState(event.target.value);
@@ -34,6 +35,7 @@ function SignUp() {
 
       if (response.status === 201) {
         notify("Votre compte à bien été crée", "success");
+        navigate("/topics");
       }
     } catch (err) {
       console.error("Error fetching data:", err);

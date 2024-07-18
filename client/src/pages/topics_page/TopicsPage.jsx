@@ -93,11 +93,17 @@ function TopicsPage() {
                   <input
                     type="text"
                     id={styles.title}
+                    placeholder="Titre"
                     name="title"
                     min={4}
                     max={60}
                   />
-                  <textarea id={styles.subject} name="subject" min={4} />
+                  <textarea
+                    id={styles.subject}
+                    name="subject"
+                    min={4}
+                    placeholder="Sujet"
+                  />
                   <span className={styles.buttonContainer}>
                     <button
                       className={`button2 ${styles.widowTopicButton}`}

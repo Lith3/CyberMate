@@ -61,7 +61,16 @@
 .button {
   font-size: 1.6em;
 }
-
+.delete {
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  border-radius: 15px;
+  font-size: 1.6em;
+  padding: 0.5em;
+  min-width: 200px;
+  cursor: pointer;
+}
 #inputContainer {
   display: flex;
   flex-direction: column;
@@ -88,6 +97,40 @@
   width: 100%;
 }
 
+/*------------------------------ CONFIRME BOX ------------------------------- */
+.confirmBoxContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#confirmBox {
+  border: solid 2px var(--third-color);
+  height: 30vh;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--topic-background);
+  border-radius: 15px;
+  max-width: 50em;
+}
+.textConfirmBox {
+  color: white;
+  font-size: 1.8em;
+  text-align: center;
+}
+.buttonConfBox {
+  font-size: 1.3em;
+}
+.deleteConf {
+  display: flex;
+  gap: 5em;
+}
+/*------------------------------ MEDIA CORIES ------------------------------- */
 @media screen and (max-width: 880px) {
   #profile {
     flex-direction: column;
@@ -116,5 +159,18 @@
     height: 15em;
     width: 15em;
     min-height: 15em;
+  }
+  #confirmBox {
+    width: 85vw;
+  }
+  .textConfirmBox {
+    font-size: 1.3em;
+  }
+  .buttonConfBox {
+    font-size: 1.2em;
+    min-width: 130px;
+  }
+  .deleteConf {
+    gap: 1em;
   }
 }

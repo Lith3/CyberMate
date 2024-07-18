@@ -108,6 +108,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .loading {
   color: white;
   font-size: 5em;
@@ -153,5 +154,8 @@
   }
   #textContainer {
     gap: 0.5em;
+  }
+  #topicList {
+    height: 80vh;
   }
 }

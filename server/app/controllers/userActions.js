@@ -112,8 +112,20 @@ const login = async (req, res, next) => {
   }
 };
 // The D of BREAD - Destroy (Delete) operation
-// This operation is not yet implemented
+const destroy = async (req, res, next) => {
+  try {
+    const user = await tables.user.delete(req.user);
 
+    if (user !== null || user !== undefined) {
+      res.clearCookie("cybermateCookie");
+      res.sendStatus(204);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 // Ready to export the controller functions
 module.exports = {
   read,
@@ -121,5 +133,5 @@ module.exports = {
   add,
   login,
   edit,
-  // destroy,
+  destroy,
 };
