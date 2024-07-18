@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import notify from "../../utils/notify";
 import styles from "../topics_page/TopicsPage.module.css";
 import Message from "../../components/conversation/message/Message";
@@ -10,6 +10,9 @@ function Conversation() {
   const URL = import.meta.env.VITE_API_URL;
   const [messages, setMessages] = useState([]);
   const topicId = useParams().id;
+  const navigate = useNavigate;
+  const [newMessage, setNewMessage] = useState("");
+  const [change, setChange] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +24,9 @@ function Conversation() {
         if (response.status === 200) {
           const data = await response.json();
           setMessages(data);
+        } else {
+          navigate("/connexion");
+          notify("Vous devez être connecté pour accéder à cette page", "error");
         }
       } catch (error) {
         notify("Erreur de réseau de connexion", "error");
@@ -28,7 +34,8 @@ function Conversation() {
       }
     };
     fetchData();
-  }, [URL, topicId]);
+  }, [URL, navigate, topicId, change]);
+
   return (
     <>
       <NavBar />
@@ -45,7 +52,13 @@ function Conversation() {
         ) : (
           <p className={styles.loading}>...</p>
         )}
-        <ChatBar />
+        <ChatBar
+          setNewMessage={setNewMessage}
+          newMessage={newMessage}
+          topicId={topicId}
+          setChange={setChange}
+          change={change}
+        />
       </main>
     </>
   );

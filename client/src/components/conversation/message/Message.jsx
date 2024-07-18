@@ -5,7 +5,7 @@ import "./Message.css";
 function Message({ message }) {
   return (
     <div className={`${styles.topic} messageContainer`}>
-      <div className={styles.topicHeader}>
+      <div className={`${styles.topicHeader} gap `}>
         <img
           className="messageAvatar"
           src={message.avatar}

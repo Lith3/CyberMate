@@ -14,6 +14,7 @@ const {
   edit,
   destroy,
   editImage,
+  disconect,
 } = require("../../../controllers/userActions");
 const userIdCookie = require("../../../services/userIdcookie");
 const upload = require("../../../services/upload");
@@ -30,6 +31,9 @@ router.post("/login", login);
 router.delete("/", userIdCookie, destroy);
 
 router.put("/image", userIdCookie, upload.single("avatar"), editImage);
+
+// Route to logout
+router.post("/logout", disconect);
 
 /* ************************************************************************* */
 

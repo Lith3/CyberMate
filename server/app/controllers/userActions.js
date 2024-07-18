@@ -144,6 +144,12 @@ const editImage = async (req, res, next) => {
     next(err);
   }
 };
+
+const disconect = async (req, res) => {
+  res.clearCookie("cretchomCookie");
+  res.status(200).json();
+};
+
 // Ready to export the controller functions
 module.exports = {
   read,
@@ -152,4 +158,5 @@ module.exports = {
   edit,
   editImage,
   destroy,
+  disconect,
 };

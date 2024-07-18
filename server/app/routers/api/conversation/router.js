@@ -7,10 +7,12 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import topic-related actions
-const { read } = require("../../../controllers/conversationActions");
+const { read, add } = require("../../../controllers/conversationActions");
 const userIdCookie = require("../../../services/userIdcookie");
 
 // Route to add a new topic
+router.post("/:id", userIdCookie, add);
+
 router.get("/:id", userIdCookie, read);
 
 /* ************************************************************************* */

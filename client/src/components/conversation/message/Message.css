@@ -23,3 +23,7 @@
   height: 5em;
   border-radius: 100%;
 }
+
+.gap {
+  gap: 1em;
+}

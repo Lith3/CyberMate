@@ -1,13 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import styles from "../sign_up/SignUp.module.css";
 import "./LogIn.css";
 import girlGun from "../../assets/images/girlGun.png";
 import notify from "../../utils/notify";
+import { AuthentificationContext } from "../../assets/use_context/Authentification";
 
 function LogIn() {
   const URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
-
+  const { setUpdate, update } = useContext(AuthentificationContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -25,6 +27,7 @@ function LogIn() {
 
       if (response.status === 200) {
         notify("Vous êtes connecté", "success");
+        setUpdate(!update);
         navigate("/topics");
       } else {
         notify("Email ou mot de passe incorrect", "error");

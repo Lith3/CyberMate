@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import notify from "../../utils/notify";
 import girlGun from "../../assets/images/girlGun.png";
 import styles from "./SignUp.module.css";
+import { AuthentificationContext } from "../../assets/use_context/Authentification";
 
 function SignUp() {
   const URL = import.meta.env.VITE_API_URL;
+  const { setUpdate, update } = useContext(AuthentificationContext);
+
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&:;ù#àâäéèêëîïôöùûüÿç])[A-Za-z\d@$!%*?&:;ù#àâäéèêëîïôöùûüÿç]{12,}$/;
   const [passwordForm, setPassword] = useState("");
@@ -35,6 +38,7 @@ function SignUp() {
 
       if (response.status === 201) {
         notify("Votre compte à bien été crée", "success");
+        setUpdate(!update);
         navigate("/topics");
       }
     } catch (err) {
