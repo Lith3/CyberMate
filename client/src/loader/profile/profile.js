@@ -10,7 +10,8 @@ const profileLoader = async () => {
       credentials: "include",
     });
     if (response.status === 401 || response.status === 403) {
-      return redirect("/acces_refuse");
+      notify("Vous devez être connecté pour accéder à cette partie", "error");
+      return redirect("/connexion");
     }
     if (response.status !== 200) {
       notify("Erreur lors de la récupération des données du profil !", "error");

@@ -11,12 +11,14 @@ import Profile from "./pages/profile/Profile";
 import profileLoader from "./loader/profile/profile";
 import Conversation from "./pages/conversation/Conversation";
 import conversationLoader from "./loader/profile/conversationLoader";
+import HomePage from "./pages/home_page/HomePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      { path: "/", element: <HomePage /> },
       { path: "/inscription", element: <SignUp /> },
       { path: "/connexion", element: <LogIn /> },
       { path: "/topics", element: <TopicsPage /> },

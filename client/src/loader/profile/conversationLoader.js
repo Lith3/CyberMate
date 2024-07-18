@@ -11,7 +11,8 @@ const conversationLoader = async () => {
     });
 
     if (response.status !== 200) {
-      return redirect("/acces_refuse");
+      notify("Vous devez être connecté pour accéder à cette partie", "error");
+      return redirect("/connexion");
     }
 
     return response.status;

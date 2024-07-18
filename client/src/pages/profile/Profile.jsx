@@ -91,7 +91,7 @@ function Profile() {
       });
       if (response.status === 204) {
         notify("Votre compte a été supprimé", "success");
-        navigate("/connexion");
+        navigate("/");
       } else notify("Une erreur est survenue", "error");
     } catch (err) {
       console.error("Fetch error:", err);
@@ -110,7 +110,7 @@ function Profile() {
 
   const imageHandler = async (event) => {
     event.preventDefault();
-
+    setChangeAvatar(!changeAvatar);
     const formData = new FormData(event.target);
     try {
       const response = await fetch(`${URL}/user/image`, {
