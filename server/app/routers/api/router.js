@@ -11,12 +11,15 @@ const router = express.Router();
 const userRouter = require("./user/router");
 const topicRouter = require("./topic/router");
 const authRouter = require("./auth/router");
+const conversationRouter = require("./conversation/router");
 
 router.use("/user", userRouter);
 
 router.use("/topic", topicRouter);
 
 router.use("/auth", authRouter);
+
+router.use("/conversation", conversationRouter);
 
 router.use(
   "/avatars",

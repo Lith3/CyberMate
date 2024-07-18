@@ -50,6 +50,24 @@
   color: var(--third-color);
   margin-right: 0.5em;
 }
+.loading {
+  color: white;
+  font-size: 5em;
+  text-align: center;
+}
+
+.disable {
+  opacity: 30%;
+  cursor: not-allowed;
+}
+.unavailable {
+  cursor: not-allowed;
+}
+
+.link {
+  text-decoration: none;
+  width: 90%;
+}
 /* ----------------- POPUP NEW TOPIC STYLE -----------------*/
 #newTopicContainer {
   position: fixed;
@@ -107,16 +125,6 @@
 .buttonContainer {
   display: flex;
   justify-content: space-between;
-}
-
-.loading {
-  color: white;
-  font-size: 5em;
-  text-align: center;
-}
-
-.disable {
-  opacity: 30%;
 }
 @media screen and (max-width: 750px) {
   .widowTopicButton,

@@ -25,12 +25,15 @@ class UserRepository extends AbstractRepository {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific message by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `select message.id, message.content, DATE_FORMAT(message.date, "%d/%m/%Y") AS date, username, avatar, topic.title  from ${this.table} JOIN user ON message.user_id = user.id JOIN topic ON message.topic_id = topic.id where topic_id = ?`,
       [id]
     );
-
+    // const topicName = await this.database.query(
+    //   "select title from topic where topic.id = ?",
+    //   [id]
+    // );
     // Return the first row of the result, which represents the message
-    return rows[0];
+    return rows;
   }
 
   // The U of CRUD - Update operation

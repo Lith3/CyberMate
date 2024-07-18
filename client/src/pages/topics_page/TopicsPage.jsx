@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./TopicsPage.module.css";
 import NavBar from "../../components/navbar/NavBar";
 import magnifier from "../../assets/images/search_neon.png";
@@ -129,7 +130,14 @@ function TopicsPage() {
             <ul id={styles.topicList}>
               {topics.map((topic) => (
                 <li className={styles.topicContainer} key={topic.id}>
-                  <Topic topic={topic} />
+                  <Link
+                    to={`/conversation/${topic.id}`}
+                    disable={auth !== true}
+                    className={`${styles.link} ${auth !== true && styles.unavailable}`}
+                  >
+                    {" "}
+                    <Topic topic={topic} />
+                  </Link>
                 </li>
               ))}
             </ul>

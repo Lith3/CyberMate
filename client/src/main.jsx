@@ -9,6 +9,7 @@ import LogIn from "./pages/log_in/LogIn";
 import TopicsPage from "./pages/topics_page/TopicsPage";
 import Profile from "./pages/profile/Profile";
 import profileLoader from "./loader/profile/profile";
+import Conversation from "./pages/conversation/Conversation";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "/connexion", element: <LogIn /> },
       { path: "/topics", element: <TopicsPage /> },
       { path: "/profil", element: <Profile />, loader: profileLoader },
+      { path: "/conversation/:id", element: <Conversation /> },
     ],
   },
 ]);

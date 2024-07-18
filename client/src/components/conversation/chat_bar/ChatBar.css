@@ -1,0 +1,32 @@
+#chatBarContainer {
+  width: 100%;
+  min-height: 10vh;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chatBar {
+  height: 80%;
+  width: 80%;
+  border: 2px solid var(--third-color);
+  border-radius: 15px;
+  background-color: var(--topic-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messageBar {
+  min-height: 65px;
+
+  font-family: "chakra petch";
+  color: white;
+  font-size: 1.2em;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  align-items: center;
+}
