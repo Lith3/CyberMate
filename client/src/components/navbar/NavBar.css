@@ -17,3 +17,9 @@ nav {
 .navItem.active {
   display: none;
 }
+
+#disconnectButton {
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
+}

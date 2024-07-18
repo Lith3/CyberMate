@@ -146,7 +146,7 @@ const editImage = async (req, res, next) => {
 };
 
 const disconect = async (req, res) => {
-  res.clearCookie("cretchomCookie");
+  res.clearCookie("cybermateCookie");
   res.status(200).json();
 };
 
