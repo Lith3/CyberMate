@@ -129,7 +129,7 @@ function SignUp() {
             type="submit"
             disabled={passwordForm !== passwordConf}
           >
-            CREER VOTRE COMPTE
+            CRÉEZ VOTRE COMPTE
           </button>
           <span id={styles.account}>
             DÉJÀ UN COMPTE ?{" "}

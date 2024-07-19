@@ -15,7 +15,7 @@ function HomePage() {
             type="button"
             onClick={() => navigate("/inscription")}
           >
-            CREER VOTRE COMPTE
+            CRÉEZ VOTRE COMPTE
           </button>
           <button
             id={styles.connect}

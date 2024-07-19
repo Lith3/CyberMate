@@ -243,7 +243,7 @@ function Profile() {
                     type="button"
                     onClick={() => dispatch({ type: "TOGGLE_EDIT_MODE" })}
                   >
-                    EDITER
+                    ÉDITER
                   </button>
                   <button
                     className={`${styles.delete} ${styles.button}`}
