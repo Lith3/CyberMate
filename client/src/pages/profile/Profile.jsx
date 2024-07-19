@@ -2,8 +2,9 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useReducer, useRef, useState } from "react";
 import NavBar from "../../components/navbar/NavBar";
 import styles from "./Profile.module.css";
-import EditableField from "../../components/profile_page/EditableField";
+import EditableField from "../../components/profile_page/editable_field/EditableField";
 import notify from "../../utils/notify";
+import NewPassword from "../../components/profile_page/new_password/NewPassword";
 
 function Profile() {
   const URL = import.meta.env.VITE_API_URL;
@@ -11,6 +12,7 @@ function Profile() {
   const userData = useLoaderData();
   const [confirmBox, setConfirmBox] = useState(false);
   const [changeAvatar, setChangeAvatar] = useState(false);
+  const [passwordBox, setPasswordBox] = useState(false);
 
   // Create initial State for the useReducer hook
   const initialState = {
@@ -141,6 +143,12 @@ function Profile() {
     <>
       <NavBar />
       <main id={styles.container}>
+        {passwordBox === true && (
+          <NewPassword
+            passwordBox={passwordBox}
+            setPasswordBox={setPasswordBox}
+          />
+        )}
         {confirmBox === true && (
           <div className={styles.confirmBoxContainer}>
             <div id={styles.confirmBox}>
@@ -280,7 +288,12 @@ function Profile() {
             <div id={styles.security}>
               <p className={styles.label}>Securité</p>
               <span className={styles.row}>
-                <button className="button2" id={styles.password} type="button">
+                <button
+                  className="button2"
+                  id={styles.password}
+                  type="button"
+                  onClick={() => setPasswordBox(!passwordBox)}
+                >
                   CHANGER DE MOT DE PASSE
                 </button>
               </span>
