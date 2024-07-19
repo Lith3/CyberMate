@@ -18,11 +18,15 @@ const {
 } = require("../../../controllers/userActions");
 const userIdCookie = require("../../../services/userIdcookie");
 const upload = require("../../../services/upload");
+const {
+  validateSignup,
+  validateProfileEdit,
+} = require("../../../services/validateUser");
 
 // Route to add a new user
-router.post("/", add);
+router.post("/", validateSignup, add);
 
-router.put("/", userIdCookie, edit);
+router.put("/", userIdCookie, validateProfileEdit, edit);
 
 router.get("/profile", userIdCookie, read);
 

@@ -40,6 +40,9 @@ function SignUp() {
         notify("Votre compte à bien été crée", "success");
         setUpdate(!update);
         navigate("/topics");
+      } else {
+        const errorData = await response.json();
+        notify(errorData.validationErrors[0].message, "error");
       }
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -108,8 +111,7 @@ function SignUp() {
               className="inputSizeM"
               type="password"
               name="passwordConf"
-              minLength={2}
-              maxLength={20}
+              minLength={12}
               required
               onChange={(event) => handleInputChange(event, setPasswordConf)}
             />

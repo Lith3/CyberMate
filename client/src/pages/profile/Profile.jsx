@@ -131,7 +131,7 @@ function Profile() {
         notify("Image téléchargée avec succès", "success");
         setTimeout(() => {
           window.location.reload();
-        }, "2000");
+        }, "1000");
       }
     } catch (error) {
       console.error("Erreur:", error);
@@ -251,7 +251,7 @@ function Profile() {
           <section className={styles.sectionTwo}>
             <div id={styles.inputContainer}>
               <EditableField
-                label="Username"
+                label="Pseudo"
                 value={state.user.username}
                 isEditMode={state.isEditMode}
                 valueName="username"
@@ -261,7 +261,7 @@ function Profile() {
                 label="Email"
                 value={state.user.email}
                 isEditMode={state.isEditMode}
-                valueName="username"
+                valueName="email"
                 onChange={onChange}
               />
               <div className={styles.field}>
