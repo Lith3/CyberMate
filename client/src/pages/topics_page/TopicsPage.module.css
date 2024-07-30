@@ -151,7 +151,7 @@
     width: 41vw;
   }
   #inputContainer {
-    width: 75%;
+    width: 100%;
     min-width: 200px;
     justify-content: space-between;
   }

@@ -203,7 +203,7 @@ function Profile() {
                   className="button1"
                   type="submit"
                 >
-                  VALDER
+                  VALIDER
                 </button>
               </form>
             </div>

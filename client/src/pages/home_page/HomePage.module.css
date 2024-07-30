@@ -59,6 +59,7 @@ h1 {
   }
   h1 {
     font-size: 15vw;
+    -webkit-text-stroke-width: 2px;
   }
   #account,
   #connect {

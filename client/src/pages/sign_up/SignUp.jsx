@@ -97,8 +97,8 @@ function SignUp() {
             <div className={styles.smallContainer}>
               {passwordRegex.test(passwordForm) !== true && (
                 <small className={styles.incorrect}>
-                  Le mot de passe doit comprendre une majuscule, une minuscule,
-                  un chiffre et un caractère spécial.
+                  Le mot de passe doit comprendre au moins douze caractères,
+                  dont une majuscule, un chiffre et un caractère spécial.
                 </small>
               )}
             </div>

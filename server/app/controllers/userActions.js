@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 // Import access to database tables
 const tables = require("../../database/tables");
 
-const URL = `http://${process.env.DB_HOST}:${process.env.APP_PORT}/api`;
+const URL = `http://${process.env.APP_HOST}:${process.env.APP_PORT}/api`;
 
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
