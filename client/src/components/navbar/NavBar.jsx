@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 import { AuthentificationContext } from "../../assets/use_context/Authentification";
-import notify from "../../utils/notify";
 
 function NavBar() {
   const { auth, update, setUpdate } = useContext(AuthentificationContext);
@@ -19,11 +19,11 @@ function NavBar() {
       });
       if (response.status === 200) {
         setUpdate(!update);
-        notify("Vous êtes déconnecté", "success");
+        toast.success("Vous êtes déconnecté");
         navigate("/connexion");
       }
     } catch (error) {
-      notify("Erreur", "error");
+      toast.error("Erreur");
     }
   };
   return (

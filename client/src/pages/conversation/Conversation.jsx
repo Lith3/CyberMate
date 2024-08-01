@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import notify from "../../utils/notify";
+import { toast } from "react-toastify";
 import styles from "../topics_page/TopicsPage.module.css";
 import Message from "../../components/conversation/message/Message";
 import NavBar from "../../components/navbar/NavBar";
@@ -26,10 +26,10 @@ function Conversation() {
           setMessages(data);
         } else {
           navigate("/connexion");
-          notify("Vous devez être connecté pour accéder à cette page", "error");
+          toast.error("Vous devez être connecté pour accéder à cette page");
         }
       } catch (error) {
-        notify("Erreur de réseau de connexion", "error");
+        toast.error("Erreur de réseau de connexion");
         console.error("Fetch error:", error);
       }
     };

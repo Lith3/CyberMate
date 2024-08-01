@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 import styles from "../sign_up/SignUp.module.css";
 import "./LogIn.css";
 import girlGun from "../../assets/images/girlGun.png";
-import notify from "../../utils/notify";
 import { AuthentificationContext } from "../../assets/use_context/Authentification";
 
 function LogIn() {
@@ -26,11 +26,11 @@ function LogIn() {
       });
 
       if (response.status === 200) {
-        notify("Vous êtes connecté", "success");
+        toast.success("Vous êtes connecté");
         setUpdate(!update);
         navigate("/topics");
       } else {
-        notify("Email ou mot de passe incorrect", "error");
+        toast.error("Email ou mot de passe incorrect");
       }
     } catch (err) {
       console.error("Error fetching data:", err);

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
 import "./ChatBar.css";
-import notify from "../../../utils/notify";
+import { toast } from "react-toastify";
 
 function ChatBar({ newMessage, setNewMessage, topicId, setChange, change }) {
   const URL = import.meta.env.VITE_API_URL;
@@ -20,7 +20,7 @@ function ChatBar({ newMessage, setNewMessage, topicId, setChange, change }) {
           credentials: "include",
         });
         if (response.status !== 201) {
-          notify("Erreur de connexion", "error");
+          toast.error("Erreur de connexion");
         }
         setChange(!change);
       } catch (err) {

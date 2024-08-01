@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import styles from "./TopicsPage.module.css";
 import NavBar from "../../components/navbar/NavBar";
 import magnifier from "../../assets/images/search_neon.png";
 import Topic from "../../components/topics_page/topic/Topic";
-import notify from "../../utils/notify";
 import { AuthentificationContext } from "../../assets/use_context/Authentification";
 
 function TopicsPage() {
@@ -31,7 +31,7 @@ function TopicsPage() {
         setTopics(jsonData);
         setLoad("Aucun résultat");
       } catch (error) {
-        notify("Erreur de réseau de connexion", "error");
+        toast.error("Erreur de réseau de connexion");
         console.error("Fetch error:", error);
       }
     };
@@ -54,13 +54,13 @@ function TopicsPage() {
       });
 
       if (response.status === 201) {
-        notify("Nouveau topic créé !", "success");
+        toast.success("Nouveau topic créé !");
         setNewTopicWindow(!newTopicWidow);
         setChange(!change);
       }
       if (response.status === 401) {
         setNewTopicWindow(!newTopicWidow);
-        notify("Vous devez être connecté pour pouvoir faire ça !", "error");
+        toast.error("Vous devez être connecté pour pouvoir faire ça !");
       }
     } catch (err) {
       console.error("Error fetching data:", err);

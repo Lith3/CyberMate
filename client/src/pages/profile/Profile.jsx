@@ -1,9 +1,9 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useReducer, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import NavBar from "../../components/navbar/NavBar";
 import styles from "./Profile.module.css";
 import EditableField from "../../components/profile_page/editable_field/EditableField";
-import notify from "../../utils/notify";
 import NewPassword from "../../components/profile_page/new_password/NewPassword";
 
 function Profile() {
@@ -68,10 +68,10 @@ function Profile() {
         if (response.status === 204) {
           dispatch({ type: "SET_BEFORE_CHANGE", payload: state.user });
           dispatch({ type: "TOGGLE_EDIT_MODE" });
-          notify("Informations mises à jour avec succès !", "success");
+          toast.success("Informations mises à jour avec succès !");
         }
         const data = await response.json();
-        notify(data.validationErrors[0].message, "error");
+        toast.error(data.validationErrors[0].message);
       } else {
         dispatch({ type: "TOGGLE_EDIT_MODE" });
       }
@@ -92,9 +92,9 @@ function Profile() {
         credentials: "include",
       });
       if (response.status === 204) {
-        notify("Votre compte a été supprimé", "success");
+        toast.success("Votre compte a été supprimé");
         navigate("/");
-      } else notify("Une erreur est survenue", "error");
+      } else toast.error("Une erreur est survenue");
     } catch (err) {
       console.error("Fetch error:", err);
     }
@@ -121,16 +121,15 @@ function Profile() {
         body: formData,
       });
       if (response.status !== 204) {
-        notify(
-          "Erreur lors de l'upload de limage, verifier que votre image fait moins de 1 mo et qu'elle est du type jpeg/jpg/png/gif",
-          "error"
+        toast.error(
+          "Erreur lors de l'upload de limage, verifier que votre image fait moins de 1 mo et qu'elle est du type jpeg/jpg/png/gif"
         );
 
         throw new Error("Erreur lors du téléchargement de l'image");
       }
 
       if (response.status === 204) {
-        notify("Image téléchargée avec succès", "success");
+        toast.success("Image téléchargée avec succès");
         setTimeout(() => {
           window.location.reload();
         }, "1000");

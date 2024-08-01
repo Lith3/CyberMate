@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import styles from "./NewPassword.module.css";
-import notify from "../../../utils/notify";
 
 function NewPassword({ passwordBox, setPasswordBox }) {
   const [oldPassword, setOldPassword] = useState("");
@@ -30,10 +30,10 @@ function NewPassword({ passwordBox, setPasswordBox }) {
       });
 
       if (response.status === 201) {
-        notify("Votre mot de passe à bien été changé", "success");
+        toast.success("Votre mot de passe à bien été changé");
       } else {
         const errorData = await response.json();
-        notify(errorData.validationErrors[0].message, "error");
+        toast.error(errorData.validationErrors[0].message);
       }
     } catch (err) {
       console.error("Error fetching data:", err);

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import notify from "../../utils/notify";
+import { toast } from "react-toastify";
 import girlGun from "../../assets/images/girlGun.png";
 import styles from "./SignUp.module.css";
 import { AuthentificationContext } from "../../assets/use_context/Authentification";
@@ -37,12 +37,12 @@ function SignUp() {
       });
 
       if (response.status === 201) {
-        notify("Votre compte à bien été crée", "success");
+        toast.success("Votre compte à bien été crée");
         setUpdate(!update);
         navigate("/topics");
       } else {
         const errorData = await response.json();
-        notify(errorData.validationErrors[0].message, "error");
+        toast.error(errorData.validationErrors[0].message);
       }
     } catch (err) {
       console.error("Error fetching data:", err);
