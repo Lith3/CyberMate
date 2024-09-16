@@ -9,7 +9,6 @@ require("./database/client").checkConnection();
 // Import the Express application
 const app = require("./app/config");
 
-// Créer un serveur HTTP à partir d'Express
 const server = http.createServer(app);
 
 // Initialiser Socket.IO avec le serveur HTTP
@@ -22,7 +21,7 @@ const io = require("socket.io")(server, {
   },
 });
 
-// Gérer les connexions Socket.IO
+// socket connection
 io.on("connection", (socket) => {
   console.info("New user : ", socket.id);
 
@@ -35,10 +34,8 @@ io.on("connection", (socket) => {
   });
 });
 
-// Récupérer le port à partir des variables d'environnement
 const port = process.env.APP_PORT;
 
-// Utiliser `server.listen()` pour démarrer le serveur HTTP et Socket.IO
 server.listen(port, () => {
   console.info(`Server is listening on port ${port}`);
 });
