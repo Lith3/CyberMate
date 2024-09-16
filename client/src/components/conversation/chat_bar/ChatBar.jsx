@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 import "./ChatBar.css";
 import { toast } from "react-toastify";
 
-function ChatBar({ newMessage, setNewMessage, topicId, setChange, change }) {
+function ChatBar({
+  newMessage,
+  setNewMessage,
+  topicId,
+  setChange,
+  change,
+  handleSubmit,
+}) {
   const URL = import.meta.env.VITE_API_URL;
   const textAreaRef = useRef(null);
 
@@ -23,6 +30,7 @@ function ChatBar({ newMessage, setNewMessage, topicId, setChange, change }) {
           toast.error("Erreur de connexion");
         }
         setChange(!change);
+        handleSubmit(event);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
@@ -53,5 +61,6 @@ ChatBar.propTypes = {
   topicId: PropTypes.string.isRequired,
   change: PropTypes.bool.isRequired,
   setChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 export default ChatBar;
