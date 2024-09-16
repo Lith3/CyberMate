@@ -22,11 +22,18 @@ const {
   validateSignup,
   validateProfileEdit,
 } = require("../../../services/validateUser");
+const uniqueEmailandUsername = require("../../../services/uniqueUserAndEmail");
 
 // Route to add a new user
-router.post("/", validateSignup, add);
+router.post("/", validateSignup, uniqueEmailandUsername, add);
 
-router.put("/", userIdCookie, validateProfileEdit, edit);
+router.put(
+  "/",
+  userIdCookie,
+  validateProfileEdit,
+  uniqueEmailandUsername,
+  edit
+);
 
 router.get("/profile", userIdCookie, read);
 

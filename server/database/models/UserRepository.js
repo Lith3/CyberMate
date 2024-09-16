@@ -40,6 +40,25 @@ class UserRepository extends AbstractRepository {
     return rows[0];
   }
 
+  // For check if an email address or username is already in use
+  async readFinder(column, element, id) {
+    if (id === undefined) {
+      const [result] = await this.database.query(
+        // column can be only mail or username, it is defined in the middleware validateSignUp
+        `SELECT COUNT(id) AS count FROM user WHERE ${column} = ?`,
+        [element]
+      );
+      return result[0].count;
+    }
+    const parsedId = parseInt(id, 10);
+    const [result] = await this.database.query(
+      // column can be only mail or username, it is defined in the middleware validateSignUp
+      `SELECT COUNT(id) AS count FROM user WHERE ${column} = ? AND NOT id = ?`,
+      [element, parsedId]
+    );
+    return result[0].count;
+  }
+
   // The U of CRUD - Update operation
 
   async update(update, userId) {
